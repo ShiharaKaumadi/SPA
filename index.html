@@ -19,6 +19,10 @@
 
 
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/customerStyles.css">
+    <link rel="stylesheet" href="assets/css/customer.css">
+    <link rel="stylesheet" href="assets/css/itemStyles.css">
+    <link rel="stylesheet" href="assets/css/orderStyles.css">
 
     <title>Budget Corner</title>
 
@@ -58,17 +62,17 @@
                     <span class="material-symbols-outlined">dashboard</span> Dashboard
                 </li>
             </a>
-            <a href="#mainContainer2" onclick="showCustomer('mainContainer2')" style="text-decoration: none;">
+            <a href="#mainContainer2" onclick="showCustomer()" style="text-decoration: none;">
                 <li class="sidebar-list-item" id="customer">
                     <span class="material-symbols-outlined">person</span> Customer
                 </li>
             </a>
-            <a href="#mainContainer3" onclick="showItem('mainContainer3')" style="text-decoration: none;">
+            <a href="#mainContainer3" onclick="showItem()" style="text-decoration: none;">
                 <li class="sidebar-list-item" id="item">
                     <span class="material-symbols-outlined">shelves</span> Items
                 </li>
             </a>
-            <a href="#mainContainer4" onclick="showPlaceOrder('mainContainer4')" style="text-decoration: none;">
+            <a href="#mainContainer4" onclick="showPlaceOrder()" style="text-decoration: none;">
                 <li class="sidebar-list-item" id="placeOrder">
                     <span class="material-symbols-outlined">list</span> Orders
                 </li>
@@ -150,22 +154,22 @@
 
             <div class="container">
                 <!-- <h2>Customer Table</h2>-->
-
-                <button id="addBtn" class="btn btn-primary">Add New Entry</button>
+                <button id="addBtn" onclick="showRegisterForm()" class="btn btn-primary" >Add New Entry</button>
                 <button id="saveTableBtn" class="btn btn-primary">Save Data</button>
 
                 <div class="search-bar">
                     <div class="d-flex justify-content-end">
                         <input id="searchBar" type="text" class="form-control search-input" placeholder="Search...">
-                        <button id="searchBtn" class="btn btn-primary">Search</button>
-                        <button id="reloadBtn" class="btn btn-secondary">Reload</button>
+                        <button id="searchBtn"  onclick="filterTable()" class="btn btn-primary">Search</button>
+                        <button id="reloadBtn" onclick="reloadTable()" class="btn btn-secondary">Reload</button>
                     </div>
                 </div>
+
                 <div class="table-responsive">
                     <table id="dataTable" class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Customer ID</th>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
@@ -182,8 +186,10 @@
             </div>
 
             <div id="registerForm" class="register-form" >
+
                 <h3>Register Customer</h3>
-                <form id="entryForm">
+
+                <form id="entryForm" onsubmit="saveCustomer(event)">
                     <div class="mb-3">
                         <label for="idInput" class="form-label">Customer ID</label>
                         <input id="idInput" type="text" class="form-control" required>
@@ -209,11 +215,14 @@
                         <input id="salaryInput" type="text" class="form-control" required>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <button id="saveBtn" class="btn btn-primary">Save</button>
-                        <button id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" id="saveBtn" onclick="saveCustomer()" style=" background-color: #26a3d0;color: #fff;border: none;width:130px;height:45px;margin-top: 28px;margin-right: 10px;cursor: pointer;border-radius: 10px; ">Save</button>
+                        <button type="button" onclick="hideRegisterForm()" style=" width:130px;height:45px;margin-top: 28px;margin-right: 10px;right:10px;padding:10px;background-color: #f54760;border-radius: 10px;border: none;">Cancel</button>
+
+
                     </div>
                 </form>
             </div>
+
 
             <div id="editForm" class="edit-form">
                 <h3>Edit Entry</h3>
@@ -243,11 +252,12 @@
                         <input id="editSalaryInput" type="text" class="form-control" required>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <button id="editSaveBtn" class="btn btn-primary">Save</button>
-                        <button id="editCancelBtn" class="btn btn-secondary">Cancel</button>
+                        <button id="editSaveBtn" onclick="saveEditedCustomer()" class="btn btn-primary">Save</button>
+                        <button id="editCancelBtn" onclick="hideEditForm()" class="btn btn-secondary">Cancel</button>
                     </div>
                 </form>
             </div>
+
         </main>
     </div>
     <div id="mainContainer3" style="display: none;">
@@ -556,7 +566,10 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.28.3/dist/apexcharts.min.js"></script>
 <!-- Bootstrap 5 JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/script.js"></script>
+<script src="controller/SideBarController.js"></script>
+<script src="controller/HomeController.js"></script>
+<script src="controller/CustomerController.js"></script>
+
 
 
 
